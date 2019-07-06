@@ -23,12 +23,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_jbeho=_oj%my(+gv(n(j2kn7+fm%c(#x&)35lhv@q&3z!o4w^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
+
+
+
 
 ALLOWED_HOSTS = []
 
 
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
